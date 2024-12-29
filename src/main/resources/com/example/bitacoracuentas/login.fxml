@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bitacoracuentas.LoginController">
+   <left>
+      <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #2B3A67;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="3.0" layoutY="94.0" prefHeight="117.0" prefWidth="220.0" text="Bitácora de Cuentas y Seguimiento Personal de Nómina" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Verdana Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="332.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="2.0" layoutY="29.0" prefHeight="17.0" prefWidth="291.0" text="Inicio de Sesión">
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <font>
+                  <Font name="Verdana" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="97.0" prefHeight="20.0" prefWidth="69.0" text="Usuario">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="138.0" text="Contraseña">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="userField" layoutX="114.0" layoutY="95.0" promptText="Usuario" />
+            <PasswordField fx:id="passwordField" layoutX="115.0" layoutY="135.0" promptText="Contraseña" />
+            <Button fx:id="loginButton" layoutX="32.0" layoutY="185.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: #F2AF29;" text="Iniciar Sesión">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="registerButton" layoutX="33.0" layoutY="248.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: #F2AF29;" text="Registrar cuenta">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Label fx:id="loginLabel" layoutX="65.0" layoutY="62.0" prefHeight="17.0" prefWidth="168.0" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
