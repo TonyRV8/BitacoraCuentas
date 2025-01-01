@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bitacoracuentas.RegisterController">
+    <left>
+        <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #2B3A67;" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" layoutX="3.0" layoutY="94.0" prefHeight="117.0" prefWidth="220.0" text="Bitácora de Cuentas y Seguimiento Personal de Nómina" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                    <font>
+                        <Font name="Verdana Bold" size="18.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </left>
+    <right>
+        <AnchorPane prefHeight="400.0" prefWidth="402.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" layoutX="30.0" layoutY="29.0" prefHeight="17.0" prefWidth="291.0" text="Registro de Cuenta">
+                    <effect>
+                        <InnerShadow />
+                    </effect>
+                    <font>
+                        <Font name="Verdana" size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="30.0" layoutY="70.0" prefHeight="20.0" prefWidth="69.0" text="Usuario">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="28.0" layoutY="108.0" text="Nombre(s)">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="28.0" layoutY="222.0" text="Contraseña">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="28.0" layoutY="262.0" text="Confirmar Contraseña">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="usernameField" layoutX="168.0" layoutY="70.0" promptText="Usuario" />
+                <TextField fx:id="nameField" layoutX="168.0" layoutY="108.0" promptText="Nombre(s)" />
+                <PasswordField fx:id="passwordField" layoutX="168.0" layoutY="222.0" promptText="Contraseña" />
+                <PasswordField fx:id="confirmPasswordField" layoutX="168.0" layoutY="262.0" promptText="Confirmar Contraseña" />
+
+                <Label fx:id="registerLabel" layoutX="65.0" layoutY="50.0" prefHeight="17.0" prefWidth="168.0" />
+            <Label layoutX="28.0" layoutY="146.0" text="Apellidos">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="apellidoField" layoutX="168.0" layoutY="146.0" promptText="Apellidos" />
+            <Label layoutX="28.0" layoutY="183.0" text="Correo">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailField" layoutX="168.0" layoutY="183.0" promptText="Correo" />
+            <Button fx:id="registerButton" layoutX="178.0" layoutY="325.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="27.0" prefWidth="143.0" style="-fx-background-color: #F2AF29;" text="Registrarse">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="cancelButton" layoutX="24.0" layoutY="325.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="27.0" prefWidth="143.0" style="-fx-background-color: #DC143C;" text="Cancelar">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            </children>
+        </AnchorPane>
+    </right>
+</BorderPane>

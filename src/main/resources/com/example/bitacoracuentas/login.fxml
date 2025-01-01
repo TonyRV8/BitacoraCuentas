@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bitacoracuentas.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #2B3A67;" BorderPane.alignment="CENTER">
@@ -50,7 +49,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="registerButton" layoutX="33.0" layoutY="248.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: #F2AF29;" text="Registrar cuenta">
+            <Button fx:id="registerButton" layoutX="33.0" layoutY="248.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="25.0" prefWidth="224.0" style="-fx-background-color: #F2AF29;" text="Registrar cuenta">
                <font>
                   <Font size="13.0" />
                </font>
