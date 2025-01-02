@@ -29,6 +29,22 @@ public class LoginController {
         } else {
             // Aquí puedes agregar tu lógica para validar el usuario
             loginLabel.setText("Logueado con éxito (placeholder)");
+
+            try {
+                // Carga el archivo FXML del login
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("inicio.fxml"));
+                Scene inicioScene = new Scene(fxmlLoader.load());
+
+                // Obtén el stage actual y cambia la escena
+                Stage stage = (Stage) loginLabel.getScene().getWindow();
+                stage.setScene(inicioScene);
+                stage.setTitle("Index");
+            } catch (IOException exception) {
+                System.out.println("Error al cargar el index: " + exception.getMessage());
+            }
+
+
+
         }
     }
 

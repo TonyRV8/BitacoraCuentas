@@ -3,6 +3,7 @@ module com.example.bitacoracuentas {
     requires javafx.fxml;
     requires java.desktop;
     requires java.sql;
+    requires jbcrypt;
 
 
     opens com.example.bitacoracuentas to javafx.fxml;
