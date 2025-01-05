@@ -1,73 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.bitacoracuentas.InicioController">
-    <!-- Menú lateral -->
-    <left>
-        <VBox style="-fx-background-color: #2B3A67;" spacing="20" alignment="TOP_CENTER" BorderPane.alignment="CENTER" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-            <children>
-                <Label text="Gestión de Finanzas" textFill="WHITE" style="-fx-font-weight: bold;">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Label>
-                <Button text="Adeudos" onAction="#mostrarAdeudos" style="-fx-background-color: #F2AF29; -fx-text-fill: white;" prefHeight="40.0" />
-                <Button text="Ingresos" onAction="#mostrarIngresos" style="-fx-background-color: #F2AF29; -fx-text-fill: white;" prefHeight="40.0" />
-                <Button text="Deudas" onAction="#mostrarDeudas" style="-fx-background-color: #F2AF29; -fx-text-fill: white;" prefHeight="40.0" />
-                <Button text="Inversiones" onAction="#mostrarInversiones" style="-fx-background-color: #F2AF29; -fx-text-fill: white;" prefHeight="40.0" />
-                <Button text="Presupuestos" onAction="#mostrarPresupuestos" style="-fx-background-color: #F2AF29; -fx-text-fill: white;" prefHeight="40.0" />
-                <Button text="Cerrar Sesión" onAction="#cerrarSesion" style="-fx-background-color: #DC143C; -fx-text-fill: white;" prefHeight="40.0" />
-            </children>
-        </VBox>
-    </left>
-
-    <!-- Contenido principal -->
-    <center>
-        <TabPane>
-            <tabs>
-                <Tab text="Vista General">
-                    <content>
-                        <AnchorPane>
-                            <children>
-                                <Label text="Bienvenido a tu Panel de Finanzas" layoutX="30.0" layoutY="30.0" style="-fx-font-size: 24px;" />
-                                <Label text="Saldo de la Quincena:" layoutX="30.0" layoutY="80.0" />
-                                <Label fx:id="saldoQuincenaLabel" text="0.00" layoutX="180.0" layoutY="80.0" style="-fx-font-weight: bold;" />
-                                <Button text="Actualizar Saldo" layoutX="30.0" layoutY="120.0" onAction="#actualizarSaldo" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Análisis de Tendencias">
-                    <content>
-                        <AnchorPane>
-                            <children>
-                                <Label text="Gráficos de Tendencias Financieras" layoutX="30.0" layoutY="30.0" style="-fx-font-size: 18px;" />
-                                <ListView fx:id="graficosListView" layoutX="30.0" layoutY="70.0" AnchorPane.topAnchor="70.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Educación Financiera">
-                    <content>
-                        <AnchorPane>
-                            <children>
-                                <Label text="Recursos de Educación Financiera" layoutX="30.0" layoutY="30.0" style="-fx-font-size: 18px;" />
-                                <ListView fx:id="educacionListView" layoutX="30.0" layoutY="70.0" AnchorPane.topAnchor="70.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
-    </center>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bitacoracuentas.InicioController">
+   <top>
+      <Pane fx:id="topPane" prefHeight="37.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="25.0" layoutY="13.0" text="Dashboard" />
+            <Label layoutX="541.0" layoutY="13.0" />
+            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="764.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </top>
+   <left>
+      <Pane prefHeight="601.0" prefWidth="194.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="sidebar" layoutX="-1.0" prefHeight="564.0" prefWidth="197.0" style="-fx-background-color: #2B3A67;" stylesheets="@styles.css">
+               <children>
+                  <Button fx:id="ingresosButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Ingresos" />
+                  <Button fx:id="adeudosButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Adeudos" />
+                  <Button fx:id="deudasButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Deudas" />
+                  <Button fx:id="inversionesButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Inversiones" />
+                  <Button fx:id="presupuestosButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Presupuestos" />
+                  <Button fx:id="exportacionButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Exportación de datos" />
+                  <Button fx:id="educacionButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Educación Financiera" />
+                  <Button fx:id="editarButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Editar Perfil" textFill="WHITE" />
+                  <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Cerrar Sesión" textFill="WHITE" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <AnchorPane fx:id="root" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>

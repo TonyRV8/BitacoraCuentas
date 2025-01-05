@@ -57,7 +57,7 @@
                 <PasswordField fx:id="passwordField" layoutX="168.0" layoutY="222.0" promptText="Contraseña" />
                 <PasswordField fx:id="confirmPasswordField" layoutX="168.0" layoutY="262.0" promptText="Confirmar Contraseña" />
 
-                <Label fx:id="registerLabel" layoutX="65.0" layoutY="50.0" prefHeight="17.0" prefWidth="168.0" />
+                <Label fx:id="registerLabel" layoutX="14.0" layoutY="50.0" prefHeight="18.0" prefWidth="345.0" />
             <Label layoutX="28.0" layoutY="146.0" text="Apellidos">
                <font>
                   <Font size="14.0" />

@@ -1,0 +1,33 @@
+/* Estilo base para botones transparentes */
+.flat-button {
+    -fx-background-color: transparent; /* Fondo transparente inicialmente */
+    -fx-border-color: #2B3A67;         /* Borde azul oscuro base */
+    -fx-text-fill: white;              /* Texto blanco */
+    -fx-font-size: 14px;               /* Tamaño de fuente */
+    -fx-font-family: "Arial";          /* Fuente */
+    -fx-padding: 10 20;                /* Espaciado interno */
+    -fx-cursor: hand;                  /* Cambia el cursor al pasar el mouse */
+    -fx-border-radius: 5px;            /* Bordes redondeados */
+    -fx-background-radius: 5px;        /* Fondo redondeado */
+}
+
+/* Hover (efecto al pasar el mouse) */
+.flat-button:hover {
+    -fx-background-color: #3B4A7F; /* Fondo ligeramente más claro que la base */
+    -fx-border-color: #2B3A67;    /* Mantiene el borde base */
+    -fx-text-fill: white;         /* Texto sigue siendo blanco */
+}
+
+/* Estilo para el botón activo (seleccionado) */
+.flat-button.active {
+    -fx-background-color: #007bff; /* Fondo azul vibrante */
+    -fx-border-color: #0056b3;     /* Borde azul más oscuro */
+    -fx-text-fill: white;          /* Texto blanco */
+}
+
+/* Efecto al presionar un botón */
+.flat-button:pressed {
+    -fx-background-color: #0056b3; /* Fondo azul más oscuro */
+    -fx-border-color: #003f7f;     /* Borde aún más oscuro */
+    -fx-text-fill: white;          /* Texto blanco */
+}

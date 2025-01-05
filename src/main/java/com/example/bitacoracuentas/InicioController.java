@@ -1,108 +1,97 @@
 package com.example.bitacoracuentas;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.List;
 
 public class InicioController {
 
     @FXML
-    private Label saldoQuincenaLabel;
+    private Pane topPane; // Pane superior para mover la ventana
+
 
     @FXML
-    private ListView<String> graficosListView;
+    private AnchorPane root; // Asegúrate de que el fx:id en el FXML coincida con este nombre
+
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     @FXML
-    private ListView<String> educacionListView;
+    private VBox sidebar; // Contenedor del menú lateral
+
+    private Button activeButton = null; // Referencia al botón activo
 
     @FXML
-    private Button cerrarSesionButton;
+    private Button logoutButton; // Botón para cerrar sesión
 
-    @FXML
-    public void mostrarAdeudos(ActionEvent event) {
-        // Lógica para mostrar la pantalla o módulo de Adeudos
-        System.out.println("Navegando al módulo de Adeudos...");
-    }
 
-    @FXML
-    public void mostrarIngresos(ActionEvent event) {
-        // Lógica para mostrar la pantalla o módulo de Ingresos
-        System.out.println("Navegando al módulo de Ingresos...");
-    }
 
-    @FXML
-    public void mostrarVistaGeneral(ActionEvent event) {
-        // Lógica para mostrar la pantalla o módulo de Ingresos
-        System.out.println("Navegando por vista general...");
-    }
 
-    @FXML
-    public void mostrarDeudas(ActionEvent event) {
-        // Lógica para mostrar la pantalla o módulo de Deudas
-        System.out.println("Navegando al módulo de Deudas...");
-    }
-
-    @FXML
-    public void mostrarInversiones(ActionEvent event) {
-        // Lógica para mostrar la pantalla o módulo de Inversiones
-        System.out.println("Navegando al módulo de Inversiones...");
-    }
-
-    @FXML
-    public void mostrarPresupuestos(ActionEvent event) {
-        // Lógica para mostrar la pantalla o módulo de Presupuestos
-        System.out.println("Navegando al módulo de Presupuestos...");
-    }
-
-    @FXML
-    public void actualizarSaldo(ActionEvent event) {
-        // Lógica para actualizar el saldo de la quincena
-        double nuevoSaldo = 1000.00; // Ejemplo de valor actualizado (reemplazar con lógica real)
-        saldoQuincenaLabel.setText(String.format("%.2f", nuevoSaldo));
-        System.out.println("Saldo de la quincena actualizado a: " + nuevoSaldo);
-    }
-
-    @FXML
-    public void cerrarSesion(ActionEvent event) {
-        try {
-            // Cambiar de escena al formulario de login
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("login.fxml"));
-            javafx.scene.Scene loginScene = new javafx.scene.Scene(loader.load());
-            Stage stage = (Stage) cerrarSesionButton.getScene().getWindow();
-            stage.setScene(loginScene);
-            stage.setTitle("Inicio de Sesión");
-            System.out.println("Sesión cerrada. Redirigiendo al login.");
-        } catch (Exception e) {
-            System.err.println("Error al cerrar sesión: " + e.getMessage());
-        }
-    }
 
     @FXML
     public void initialize() {
-        // Inicializar datos de las listas y el saldo al cargar la vista
-        saldoQuincenaLabel.setText("0.00"); // Valor inicial del saldo
-        cargarGraficos();
-        cargarRecursosEducativos();
+        // Movimiento de la ventana con el Pane superior
+        topPane.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        topPane.setOnMouseDragged(event -> {
+            Stage stage = (Stage) topPane.getScene().getWindow();
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        });
+
+        // Encuentra todos los botones dentro del VBox
+        List<Button> buttons = sidebar.getChildren().filtered(node -> node instanceof Button)
+                .stream()
+                .map(node -> (Button) node) // Convierte explícitamente cada Node a Button
+                .toList(); // Convierte el resultado a un List<Button>
+
+        // Agrega el comportamiento de "estado activo" a cada botón
+        for (Button button : buttons) {
+            button.setOnAction(event -> setActiveButton(button));
+        }
     }
 
-    private void cargarGraficos() {
-        // Lógica para cargar los gráficos financieros en la lista
-        graficosListView.getItems().addAll(
-                "Gráfico de Ingresos vs. Gastos",
-                "Tendencia de Ahorros",
-                "Distribución de Presupuesto"
-        );
+    private void setActiveButton(Button button) {
+        // Quita la clase "active" del botón actualmente activo
+        if (activeButton != null) {
+            activeButton.getStyleClass().remove("active");
+        }
+
+        // Establece el nuevo botón como activo
+        button.getStyleClass().add("active");
+        activeButton = button;
+
+        // Configurar el evento del botón logout
+        logoutButton.setOnAction(event -> logout());
     }
 
-    private void cargarRecursosEducativos() {
-        // Lógica para cargar los recursos educativos en la lista
-        educacionListView.getItems().addAll(
-                "Cómo iniciar un fondo de ahorro",
-                "Estrategias básicas de inversión",
-                "Consejos para reducir deudas"
-        );
+
+    private void logout() {
+        try {
+            // Cargar la vista de inicio de sesión
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/login.fxml"));
+            Parent loginRoot = loader.load();
+
+            // Crear una nueva escena para el login
+            Stage stage = (Stage) logoutButton.getScene().getWindow();
+            stage.setScene(new Scene(loginRoot));
+            stage.setTitle("Inicio de Sesión");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar la pantalla de inicio de sesión.");
+        }
     }
 }
