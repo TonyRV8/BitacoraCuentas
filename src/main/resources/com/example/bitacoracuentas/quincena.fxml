@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #F5F5F5;"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+    <children>
+        <!-- Título -->
+        <Label text="Configuración de Saldo de Quincena" layoutX="20" layoutY="10"
+               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2B3A67;" />
+
+        <!-- Saldo Total -->
+        <HBox layoutX="20" layoutY="50" spacing="10" alignment="CENTER">
+            <Label text="Saldo Total:" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+            <TextField fx:id="saldoField" prefWidth="150"
+                       style="-fx-font-size: 14px; -fx-border-color: #007bff;" />
+            <Button fx:id="saldoButton" text="Guardar Saldo" prefWidth="120"
+                    style="-fx-background-color: #007bff; -fx-text-fill: white;" />
+        </HBox>
+
+        <!-- Monto a Separar -->
+        <HBox layoutX="20" layoutY="90" spacing="10" alignment="CENTER">
+            <Label text="Monto a Separar:" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+            <TextField fx:id="separarField" prefWidth="150"
+                       style="-fx-font-size: 14px; -fx-border-color: #007bff;" />
+            <Button fx:id="confirmarSepararButton" text="Confirmar Separación" prefWidth="180"
+                    style="-fx-background-color: #28a745; -fx-text-fill: white;" />
+        </HBox>
+
+        <!-- Saldo Sobrante -->
+        <HBox layoutX="20" layoutY="140" spacing="10" alignment="CENTER">
+            <Label text="Saldo Sobrante:" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+            <Label fx:id="sobranteLabel" text="0.0"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #DC143C;" />
+        </HBox>
+
+        <!-- Distribución -->
+        <VBox layoutX="20" layoutY="180" spacing="20">
+            <Label text="Distribución por Categoría" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+            <!-- Categorías -->
+            <VBox spacing="15" alignment="CENTER_LEFT">
+                <HBox spacing="30">
+                    <Label text="Ingresos" style="-fx-font-size: 14px;" />
+                    <TextField fx:id="ingresosPorcentaje" prefWidth="60" layoutX="150" />
+                    <TextField fx:id="ingresosTotal" prefWidth="100" />
+                </HBox>
+                <HBox spacing="30">
+                    <Label text="Adeudos" style="-fx-font-size: 14px;" />
+                    <TextField fx:id="adeudosPorcentaje" prefWidth="60" layoutX="150" />
+                    <TextField fx:id="adeudosTotal" prefWidth="100" />
+                </HBox>
+                <HBox spacing="30">
+                    <Label text="Deudas" style="-fx-font-size: 14px;" />
+                    <TextField fx:id="deudasPorcentaje" prefWidth="60" layoutX="150" />
+                    <TextField fx:id="deudasTotal" prefWidth="100" />
+                </HBox>
+                <HBox spacing="30">
+                    <Label text="Inversiones" style="-fx-font-size: 14px;" />
+                    <TextField fx:id="inversionesPorcentaje" prefWidth="60" layoutX="150" />
+                    <TextField fx:id="inversionesTotal" prefWidth="100" />
+                </HBox>
+                <HBox spacing="30">
+                    <Label text="Presupuestos" style="-fx-font-size: 14px;" />
+                    <TextField fx:id="presupuestosPorcentaje" prefWidth="60" layoutX="150" />
+                    <TextField fx:id="presupuestosTotal" prefWidth="100" />
+                </HBox>
+            </VBox>
+        </VBox>
+
+        <!-- Botón Guardar -->
+        <Button fx:id="guardarButton" layoutX="190" layoutY="520" prefWidth="150"
+                text="Guardar Todo"
+                style="-fx-background-color: #007bff; -fx-text-fill: white;" />
+    </children>
+</AnchorPane>

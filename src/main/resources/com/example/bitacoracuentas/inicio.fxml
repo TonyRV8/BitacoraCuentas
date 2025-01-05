@@ -29,6 +29,7 @@
          <children>
             <VBox fx:id="sidebar" layoutX="-1.0" prefHeight="564.0" prefWidth="197.0" style="-fx-background-color: #2B3A67;" stylesheets="@styles.css">
                <children>
+                  <Button fx:id="quincenaButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Saldo de Quincena" />
                   <Button fx:id="ingresosButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Ingresos" />
                   <Button fx:id="adeudosButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Adeudos" />
                   <Button fx:id="deudasButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Deudas" />
@@ -46,7 +47,7 @@
    <center>
       <AnchorPane fx:id="root" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <StackPane fx:id="contenidoStackPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </center>

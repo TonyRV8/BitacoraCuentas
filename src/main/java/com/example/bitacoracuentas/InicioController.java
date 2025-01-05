@@ -2,11 +2,13 @@ package com.example.bitacoracuentas;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -33,6 +35,11 @@ public class InicioController {
     @FXML
     private Button logoutButton; // Botón para cerrar sesión
 
+    @FXML
+    private StackPane contenidoStackPane; // StackPane en el centro
+
+    @FXML
+    private Button quincenaButton; // Botón Saldo de Quincena
 
 
 
@@ -73,10 +80,27 @@ public class InicioController {
         button.getStyleClass().add("active");
         activeButton = button;
 
+        quincenaButton.setOnAction(event -> cargarModuloQuincena());
+
         // Configurar el evento del botón logout
         logoutButton.setOnAction(event -> logout());
     }
 
+    private void cargarModuloQuincena() {
+        try {
+            // Cargar el archivo FXML del módulo de quincena
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/quincena.fxml"));
+            Node quincenaView = loader.load();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(quincenaView);
+            System.out.println("Cargando modulo quincena");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de Saldo de Quincena.");
+        }
+    }
 
     private void logout() {
         try {
