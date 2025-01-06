@@ -6,77 +6,75 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #F5F5F5;"
-            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #F5F5F5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bitacoracuentas.QuincenaController">
 
     <children>
         <!-- Título -->
-        <Label text="Configuración de Saldo de Quincena" layoutX="20" layoutY="10"
-               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2B3A67;" />
+        <Label layoutX="20" layoutY="10" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2B3A67;" text="Configuración de Saldo de Quincena" />
 
         <!-- Saldo Total -->
-        <HBox layoutX="20" layoutY="50" spacing="10" alignment="CENTER">
-            <Label text="Saldo Total:" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
-            <TextField fx:id="saldoField" prefWidth="150"
-                       style="-fx-font-size: 14px; -fx-border-color: #007bff;" />
-            <Button fx:id="saldoButton" text="Guardar Saldo" prefWidth="120"
-                    style="-fx-background-color: #007bff; -fx-text-fill: white;" />
+        <HBox alignment="CENTER" layoutX="20" layoutY="50" spacing="10">
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Saldo Total:" />
+            <TextField fx:id="saldoField" prefWidth="150" style="-fx-font-size: 14px; -fx-border-color: #007bff;" />
         </HBox>
 
         <!-- Monto a Separar -->
-        <HBox layoutX="20" layoutY="90" spacing="10" alignment="CENTER">
-            <Label text="Monto a Separar:" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
-            <TextField fx:id="separarField" prefWidth="150"
-                       style="-fx-font-size: 14px; -fx-border-color: #007bff;" />
-            <Button fx:id="confirmarSepararButton" text="Confirmar Separación" prefWidth="180"
-                    style="-fx-background-color: #28a745; -fx-text-fill: white;" />
+        <HBox alignment="CENTER" layoutX="20" layoutY="90" spacing="10">
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Monto a Separar:" />
+            <TextField fx:id="separarField" prefWidth="150" style="-fx-font-size: 14px; -fx-border-color: #007bff;" />
         </HBox>
 
         <!-- Saldo Sobrante -->
-        <HBox layoutX="20" layoutY="140" spacing="10" alignment="CENTER">
-            <Label text="Saldo Sobrante:" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
-            <Label fx:id="sobranteLabel" text="0.0"
-                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #DC143C;" />
+        <HBox alignment="CENTER" layoutX="21.0" layoutY="166.0" spacing="10">
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Saldo Sobrante:" />
+            <Label fx:id="sobranteLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #DC143C;" text="0.0" />
         </HBox>
 
         <!-- Distribución -->
-        <VBox layoutX="20" layoutY="180" spacing="20">
-            <Label text="Distribución por Categoría" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+        <VBox layoutX="38.0" layoutY="194.0" prefHeight="294.0" prefWidth="396.0" spacing="20">
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Distribución por Categoría" />
+         <Label prefHeight="18.0" prefWidth="279.0" text="Ajusta la distribucion del monto a separar" />
 
             <!-- Categorías -->
-            <VBox spacing="15" alignment="CENTER_LEFT">
+            <VBox alignment="CENTER_LEFT" prefHeight="261.0" prefWidth="396.0" spacing="15">
+            <Label prefHeight="18.0" prefWidth="330.0" text="                       Porcentaje               Total">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
                 <HBox spacing="30">
-                    <Label text="Ingresos" style="-fx-font-size: 14px;" />
-                    <TextField fx:id="ingresosPorcentaje" prefWidth="60" layoutX="150" />
+                    <Label style="-fx-font-size: 14px;" text="Ingresos" />
+                    <TextField fx:id="ingresosPorcentaje" layoutX="150" prefWidth="60" />
                     <TextField fx:id="ingresosTotal" prefWidth="100" />
                 </HBox>
                 <HBox spacing="30">
-                    <Label text="Adeudos" style="-fx-font-size: 14px;" />
-                    <TextField fx:id="adeudosPorcentaje" prefWidth="60" layoutX="150" />
+                    <Label style="-fx-font-size: 14px;" text="Adeudos" />
+                    <TextField fx:id="adeudosPorcentaje" layoutX="150" prefWidth="60" />
                     <TextField fx:id="adeudosTotal" prefWidth="100" />
                 </HBox>
                 <HBox spacing="30">
-                    <Label text="Deudas" style="-fx-font-size: 14px;" />
-                    <TextField fx:id="deudasPorcentaje" prefWidth="60" layoutX="150" />
+                    <Label style="-fx-font-size: 14px;" text="Deudas" />
+                    <TextField fx:id="deudasPorcentaje" layoutX="150" prefWidth="60" />
                     <TextField fx:id="deudasTotal" prefWidth="100" />
                 </HBox>
                 <HBox spacing="30">
-                    <Label text="Inversiones" style="-fx-font-size: 14px;" />
-                    <TextField fx:id="inversionesPorcentaje" prefWidth="60" layoutX="150" />
+                    <Label style="-fx-font-size: 14px;" text="Inversiones" />
+                    <TextField fx:id="inversionesPorcentaje" layoutX="150" prefWidth="60" />
                     <TextField fx:id="inversionesTotal" prefWidth="100" />
                 </HBox>
                 <HBox spacing="30">
-                    <Label text="Presupuestos" style="-fx-font-size: 14px;" />
-                    <TextField fx:id="presupuestosPorcentaje" prefWidth="60" layoutX="150" />
+                    <Label style="-fx-font-size: 14px;" text="Presupuestos" />
+                    <TextField fx:id="presupuestosPorcentaje" layoutX="150" prefWidth="60" />
                     <TextField fx:id="presupuestosTotal" prefWidth="100" />
                 </HBox>
             </VBox>
         </VBox>
+      <Label fx:id="aviso2Label" layoutX="20.0" layoutY="513.0" prefHeight="18.0" prefWidth="291.0" />
+      <Label fx:id="aviso1Label" layoutX="20.0" layoutY="140.0" prefHeight="18.0" prefWidth="458.0" />
 
-        <!-- Botón Guardar -->
-        <Button fx:id="guardarButton" layoutX="190" layoutY="520" prefWidth="150"
-                text="Guardar Todo"
-                style="-fx-background-color: #007bff; -fx-text-fill: white;" />
+                 <!-- Botón Guardar -->
+        <Button fx:id="guardarButton" layoutX="327.0" layoutY="509.0" prefWidth="150" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Guardar Todo" />
     </children>
 </AnchorPane>

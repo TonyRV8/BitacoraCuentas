@@ -92,30 +92,35 @@ public class InicioController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/quincena.fxml"));
             Node quincenaView = loader.load();
 
+            // Obtener el controlador de Quincena
+            QuincenaController quincenaController = loader.getController();
+
+
             // Limpiar el StackPane y cargar el nuevo módulo
             contenidoStackPane.getChildren().clear();
             contenidoStackPane.getChildren().add(quincenaView);
-            System.out.println("Cargando modulo quincena");
+            System.out.println("Cargando módulo quincena");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error al cargar el módulo de Saldo de Quincena.");
         }
     }
 
+
     private void logout() {
+        Session.cerrarSesion(); // Limpiar los datos de la sesión
+        System.out.println("Sesión cerrada.");
+
         try {
-            // Cargar la vista de inicio de sesión
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/login.fxml"));
             Parent loginRoot = loader.load();
-
-            // Crear una nueva escena para el login
             Stage stage = (Stage) logoutButton.getScene().getWindow();
             stage.setScene(new Scene(loginRoot));
             stage.setTitle("Inicio de Sesión");
-
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error al cargar la pantalla de inicio de sesión.");
         }
     }
+
 }

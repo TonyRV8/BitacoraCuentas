@@ -45,7 +45,7 @@ public class LoginController {
     }
 
     private boolean validarCredenciales(String username, String password) {
-        String query = "SELECT password FROM usuarios WHERE username = ?";
+        String query = "SELECT id_usuario, nombre, correo, password FROM usuarios WHERE username = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -56,21 +56,30 @@ public class LoginController {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                // Obtén la contraseña encriptada desde la base de datos
+                // Obtén los datos del usuario desde la base de datos
+                int usuarioId = resultSet.getInt("id_usuario");
+                String nombre = resultSet.getString("nombre");
+                String correo = resultSet.getString("correo");
                 String hashedPassword = resultSet.getString("password");
 
                 // Verifica si la contraseña ingresada coincide con la encriptada
-                return BCrypt.checkpw(password, hashedPassword);
-            } else {
-                // Si no se encuentra el usuario, devuelve falso
-                return false;
+                if (BCrypt.checkpw(password, hashedPassword)) {
+                    // Establece la sesión del usuario actual
+                    Session.iniciarSesion(usuarioId, nombre, correo);
+                    System.out.println("Sesión iniciada para el usuario ID: " + usuarioId);
+                    return true;
+                }
             }
+
+            // Si no se encuentra el usuario o las credenciales no coinciden
+            return false;
         } catch (Exception ex) {
             ex.printStackTrace();
             loginLabel.setText("Error al conectar con la base de datos.");
             return false;
         }
     }
+
 
     private void abrirVistaInicio(ActionEvent e) {
         try {
