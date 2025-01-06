@@ -41,6 +41,8 @@ public class InicioController {
     @FXML
     private Button quincenaButton; // Botón Saldo de Quincena
 
+    @FXML
+    private Button ingresosButton;
 
 
 
@@ -81,7 +83,7 @@ public class InicioController {
         activeButton = button;
 
         quincenaButton.setOnAction(event -> cargarModuloQuincena());
-
+        ingresosButton.setOnAction(event -> cargarModuloIngresos());
         // Configurar el evento del botón logout
         logoutButton.setOnAction(event -> logout());
     }
@@ -105,6 +107,26 @@ public class InicioController {
             System.out.println("Error al cargar el módulo de Saldo de Quincena.");
         }
     }
+
+    private void cargarModuloIngresos() {
+        try {
+            // Cargar el archivo FXML del módulo de ingresos
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/ingresos.fxml"));
+            Node ingresosView = loader.load();
+
+            // Obtener el controlador de Ingresos
+            IngresosController ingresosController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(ingresosView);
+            System.out.println("Cargando módulo ingresos");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de ingresos.");
+        }
+    }
+
 
 
     private void logout() {

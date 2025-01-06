@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600.0" prefWidth="803.0" style="-fx-background-color: #F5F5F5;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bitacoracuentas.IngresosController">
+
+    <children>
+        <!-- Título -->
+        <Label layoutX="20" layoutY="10" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Gestión de Ingresos" />
+
+        <!-- Formulario para registrar ingreso -->
+        <VBox layoutX="20" layoutY="50" prefWidth="560" spacing="15">
+            <!-- Descripción -->
+            <HBox spacing="10">
+                <Label prefWidth="100" text="Descripción:" />
+                <TextField fx:id="descripcionField" prefWidth="400" promptText="Descripción del ingreso" />
+            </HBox>
+
+            <!-- Categoría -->
+            <HBox spacing="10">
+                <Label prefWidth="100" text="Categoría:" />
+                <ComboBox fx:id="categoriaComboBox" prefWidth="200" promptText="Selecciona una categoría" />
+                <Button fx:id="nuevaCategoriaButton" prefWidth="150" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Nueva Categoría" />
+            </HBox>
+
+            <!-- Monto -->
+            <HBox spacing="10">
+                <Label prefWidth="100" text="Monto:" />
+                <TextField fx:id="montoField" prefWidth="200" promptText="Monto en $" />
+            </HBox>
+
+            <!-- Botones -->
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="guardarIngresoButton" prefWidth="150" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="Guardar" />
+                <Button fx:id="cancelarIngresoButton" prefWidth="150" style="-fx-background-color: #DC143C; -fx-text-fill: white;" text="Cancelar" />
+            </HBox>
+        </VBox>
+
+        <!-- Tabla para mostrar los ingresos -->
+        <TableView fx:id="ingresosTable" layoutX="20" layoutY="250" prefHeight="320" prefWidth="754.0">
+            <columns>
+                <TableColumn fx:id="colDescripcion" prefWidth="200" text="Descripción" />
+                <TableColumn fx:id="colCategoria" prefWidth="150" text="Categoría" />
+                <TableColumn fx:id="colMonto" prefWidth="100" text="Monto ($)" />
+                <TableColumn fx:id="colFecha" prefWidth="100" text="Fecha" />
+                <!-- Columna Editar -->
+                <TableColumn fx:id="colEditar" prefWidth="60.800048828125" text="Editar" />
+                <!-- Columna Eliminar -->
+                <TableColumn fx:id="colEliminar" prefWidth="93.5999755859375" text="Eliminar" />
+            </columns>
+        </TableView>
+
+    </children>
+</AnchorPane>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #F5F5F5;"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.bitacoracuentas.CategoriaController">
+
+    <children>
+        <!-- Título -->
+        <Label layoutX="20.0" layoutY="10.0" text="Crear Nueva Categoría" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+        <!-- Nombre de la Categoría -->
+        <Label layoutX="20.0" layoutY="60.0" text="Nombre de la Categoría:" />
+        <TextField fx:id="nombreCategoriaField" layoutX="160.0" layoutY="55.0" prefWidth="200.0" />
+
+        <!-- Tipo de Categoría -->
+        <Label layoutX="20.0" layoutY="100.0" text="Tipo de Categoría:" />
+        <ComboBox fx:id="tipoCategoriaComboBox" layoutX="160.0" layoutY="95.0" prefWidth="200.0" />
+
+        <!-- Botones -->
+        <Button fx:id="guardarButton" layoutX="90.0" layoutY="150.0" prefWidth="100.0"
+                text="Guardar" style="-fx-background-color: #28a745; -fx-text-fill: white;" />
+        <Button fx:id="cancelarButton" layoutX="210.0" layoutY="150.0" prefWidth="100.0"
+                text="Cancelar" style="-fx-background-color: #DC143C; -fx-text-fill: white;" />
+    </children>
+</AnchorPane>

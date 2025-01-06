@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bitacoracuentas.InicioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bitacoracuentas.InicioController">
    <top>
       <Pane fx:id="topPane" prefHeight="37.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="25.0" layoutY="13.0" text="Dashboard" />
             <Label layoutX="541.0" layoutY="13.0" />
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="764.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="1011.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/close.png" />
                </image>
