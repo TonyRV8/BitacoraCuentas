@@ -43,6 +43,8 @@ public class InicioController {
 
     @FXML
     private Button ingresosButton;
+    @FXML
+    private Button inversionesButton;
 
 
 
@@ -84,8 +86,27 @@ public class InicioController {
 
         quincenaButton.setOnAction(event -> cargarModuloQuincena());
         ingresosButton.setOnAction(event -> cargarModuloIngresos());
+        inversionesButton.setOnAction(event -> cargarModuloInversiones());
         // Configurar el evento del botón logout
         logoutButton.setOnAction(event -> logout());
+    }
+
+    private void cargarModuloInversiones() {
+        try {
+            // Cargar el archivo FXML del módulo de inversiones
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/inversiones.fxml"));
+            Node inversionesView = loader.load();
+
+            InversionesController inversionesController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(inversionesView);
+            System.out.println("Cargando módulo Inversiones");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de Inversiones.");
+        }
     }
 
     private void cargarModuloQuincena() {
@@ -93,10 +114,8 @@ public class InicioController {
             // Cargar el archivo FXML del módulo de quincena
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/quincena.fxml"));
             Node quincenaView = loader.load();
-
-            // Obtener el controlador de Quincena
+            // Obtener el controlador
             QuincenaController quincenaController = loader.getController();
-
 
             // Limpiar el StackPane y cargar el nuevo módulo
             contenidoStackPane.getChildren().clear();

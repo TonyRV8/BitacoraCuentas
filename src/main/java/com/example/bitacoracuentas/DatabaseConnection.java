@@ -9,7 +9,7 @@ public class DatabaseConnection {
     // URL de conexión, usuario y contraseña
     private static final String URL = "jdbc:postgresql://localhost:5432/dbcuentas";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "12345";
 
     // Método para obtener la conexión
     public static Connection getConnection() {

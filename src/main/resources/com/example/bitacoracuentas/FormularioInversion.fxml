@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bitacoracuentas.FormularioInversionController">
+    <top>
+        <AnchorPane prefHeight="60.0" prefWidth="800.0">
+            <children>
+                <!-- Título centrado -->
+                <Label text="Formulario de Inversión" layoutX="275.0" layoutY="20.0" style="-fx-font-size: 16px; -fx-text-fill: #F2AF29; -fx-font-weight: bold;"/>
+            </children>
+        </AnchorPane>
+    </top>
+    <center>
+        <AnchorPane prefHeight="500.0" prefWidth="800.0">
+            <children>
+                <!-- VBox centrado -->
+                <VBox layoutX="275.0" layoutY="30.0" spacing="15.0" alignment="CENTER">
+                    <!-- Descripción de la Inversión -->
+                    <TextField fx:id="descripcionField" promptText="Descripción de la inversión" prefWidth="220.0" style="-fx-background-color: #4C4C4C; -fx-text-fill: white; -fx-prompt-text-fill: #FFFFFF; -fx-font-size: 12px;"/>
+
+                    <!-- Monto -->
+                    <TextField fx:id="montoField" promptText="Monto invertido" prefWidth="220.0" style="-fx-background-color: #4C4C4C; -fx-text-fill: white; -fx-prompt-text-fill: #FFFFFF; -fx-font-size: 12px;"/>
+
+                    <!-- Rendimiento Estimado -->
+                    <TextField fx:id="rendimientoField" promptText="Rendimiento estimado" prefWidth="220.0" style="-fx-background-color: #4C4C4C; -fx-text-fill: white; -fx-prompt-text-fill: #FFFFFF; -fx-font-size: 12px;"/>
+
+                    <!-- Fecha de Inicio -->
+                    <DatePicker fx:id="fechaInicioField" promptText="Fecha de inicio" prefWidth="220.0" style="-fx-background-color: #4C4C4C; -fx-text-fill: white; -fx-font-size: 12px;"/>
+
+                    <!-- Fecha de Fin -->
+                    <DatePicker fx:id="fechaFinField" promptText="Fecha de finalización (opcional)" prefWidth="220.0" style="-fx-background-color: #4C4C4C; -fx-text-fill: white; -fx-font-size: 12px;"/>
+
+                    <!-- Botones -->
+                    <Button fx:id="guardarButton" text="Guardar Inversión" onAction="#guardarInversion" prefWidth="220.0" style="-fx-background-color: #33A1FD; -fx-text-fill: white; -fx-font-size: 12px; -fx-border-radius: 5px; -fx-background-radius: 5px;"/>
+                    <Button fx:id="cancelarButton" text="Limpiar" onAction="#cancelarFormulario" prefWidth="220.0" style="-fx-background-color: #F2AF29; -fx-text-fill: white; -fx-font-size: 12px; -fx-border-radius: 5px; -fx-background-radius: 5px;"/>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
+
