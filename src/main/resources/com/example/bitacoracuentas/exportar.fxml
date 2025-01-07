@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.bitacoracuentas.ExportController">
 
-<VBox alignment="CENTER" spacing="15" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.bitacoracuentas.ExportarController">
-    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Exportar Datos" />
-    <HBox alignment="CENTER" spacing="10">
-        <Label text="Formato:" />
-        <ComboBox fx:id="formatoComboBox" prefWidth="150">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="PDF" />
-                    <String fx:value="Excel" />
-                    <String fx:value="CSV" />
-                </FXCollections>
-            </items>
-        </ComboBox>
+    <Label text="Módulo de exportación de datos" />
+
+    <!-- Selección de Periodo -->
+    <HBox spacing="10">
+        <Label text="Periodo:" />
+        <ComboBox fx:id="periodoComboBox" />
     </HBox>
-    <Button fx:id="exportarButton" style="-fx-padding: 10px;" text="Exportar" />
-    <Label fx:id="estadoLabel" style="-fx-text-fill: gray;" text="" />
-   <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Módulo en desarrollo" />
+
+    <!-- Selección de Tipo de Archivo (RadioButton para selección única) -->
+    <Label text="Tipo de archivo:" />
+    <VBox spacing="5">
+        <RadioButton text="PDF" fx:id="pdfRadioButton" toggleGroup="$archivoToggleGroup"/>
+        <RadioButton text="Excel" fx:id="excelRadioButton" toggleGroup="$archivoToggleGroup"/>
+        <RadioButton text="CSV" fx:id="csvRadioButton" toggleGroup="$archivoToggleGroup" selected="true"/>
+    </VBox>
+
+    <!-- Selección de Formato (RadioButton para selección única) -->
+    <Label text="Formato:" />
+    <VBox spacing="5">
+        <RadioButton text="Reporte" fx:id="reporteRadioButton" toggleGroup="$formatoToggleGroup"/>
+        <RadioButton text="Datos" fx:id="datosRadioButton" toggleGroup="$formatoToggleGroup"/>
+    </VBox>
+
+    <!-- Botón Exportar -->
+    <Button text="Exportar" fx:id="exportarButton" onAction="#exportarDatos"/>
+    <Label fx:id="mensajeLabel" textFill="red"/>
 </VBox>
+

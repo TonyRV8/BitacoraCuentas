@@ -323,7 +323,7 @@ public class InicioController {
             Node exportarView = loader.load();
 
             // Obtener el controlador del módulo
-            ExportarController exportarController = loader.getController();
+            loader.getController();
 
             // Limpiar el StackPane y cargar el nuevo módulo
             contenidoStackPane.getChildren().clear();
