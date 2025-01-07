@@ -17,7 +17,6 @@ import java.util.List;
 
 public class InicioController {
 
-
     @FXML
     private Pane topPane; // Pane superior para mover la ventana
 
@@ -44,10 +43,21 @@ public class InicioController {
 
     @FXML
     private Button ingresosButton;
+
+    @FXML
+    private Button adeudosButton;
+
+    @FXML
+    private Button deudasButton;
+
     @FXML
     private Button inversionesButton;
     @FXML
     private Button presupuestosButton;
+
+
+    @FXML
+    private Button editarButton;
 
 
     @FXML
@@ -88,10 +98,93 @@ public class InicioController {
 
         quincenaButton.setOnAction(event -> cargarModuloQuincena());
         ingresosButton.setOnAction(event -> cargarModuloIngresos());
+        adeudosButton.setOnAction(event -> cargarModuloAdeudos());
+        deudasButton.setOnAction(event -> cargarModuloDeudas());
         inversionesButton.setOnAction(event -> cargarModuloInversiones());
         presupuestosButton.setOnAction(event -> cargarModuloPresupuestos());
+        editarButton.setOnAction(event -> cargarModuloEditarPerfil());
+
+
+
         // Configurar el evento del botón logout
         logoutButton.setOnAction(event -> logout());
+    }
+
+    private void cargarModuloQuincena() {
+        try {
+            // Cargar el archivo FXML del módulo de quincena
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/quincena.fxml"));
+            Node quincenaView = loader.load();
+
+            // Obtener el controlador de Quincena
+            QuincenaController quincenaController = loader.getController();
+
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(quincenaView);
+            System.out.println("Cargando módulo quincena");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de Saldo de Quincena.");
+        }
+    }
+
+    private void cargarModuloIngresos() {
+        try {
+            // Cargar el archivo FXML del módulo de ingresos
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/ingresos.fxml"));
+            Node ingresosView = loader.load();
+
+            // Obtener el controlador de Ingresos
+            IngresosController ingresosController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(ingresosView);
+            System.out.println("Cargando módulo ingresos");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de ingresos.");
+        }
+    }
+
+    private void cargarModuloAdeudos() {
+        try {
+            // Cargar el archivo FXML del módulo de adeudos
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/adeudos.fxml"));
+            Node adeudosView = loader.load();
+
+            // Obtener el controlador de Adeudos
+            AdeudosController adeudosController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(adeudosView);
+            System.out.println("Cargando módulo adeudos");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de adeudos.");
+        }
+    }
+
+    private void cargarModuloDeudas() {
+        try {
+            // Cargar el archivo FXML del módulo de deudas
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/deudas.fxml"));
+            Node deudasView = loader.load();
+
+            // Obtener el controlador de Deudas
+            DeudasController deudasController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(deudasView);
+            System.out.println("Cargando módulo deudas");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de deudas.");
+        }
     }
 
     private void cargarModuloPresupuestos() {
@@ -128,40 +221,22 @@ public class InicioController {
         }
     }
 
-    private void cargarModuloQuincena() {
+    private void cargarModuloEditarPerfil() {
         try {
-            // Cargar el archivo FXML del módulo de quincena
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/quincena.fxml"));
-            Node quincenaView = loader.load();
-            // Obtener el controlador
-            QuincenaController quincenaController = loader.getController();
+            // Cargar el archivo FXML del módulo de Editar Perfil
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/editarPerfil.fxml"));
+            Node editarPerfilView = loader.load();
+
+            // Obtener el controlador de Editar Perfil (si necesitas pasar datos, por ejemplo)
+            editarPerfilController editarPerfilController = loader.getController();
 
             // Limpiar el StackPane y cargar el nuevo módulo
             contenidoStackPane.getChildren().clear();
-            contenidoStackPane.getChildren().add(quincenaView);
-            System.out.println("Cargando módulo quincena");
+            contenidoStackPane.getChildren().add(editarPerfilView);
+            System.out.println("Cargando módulo editar perfil.");
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error al cargar el módulo de Saldo de Quincena.");
-        }
-    }
-
-    private void cargarModuloIngresos() {
-        try {
-            // Cargar el archivo FXML del módulo de ingresos
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/ingresos.fxml"));
-            Node ingresosView = loader.load();
-
-            // Obtener el controlador de Ingresos
-            IngresosController ingresosController = loader.getController();
-
-            // Limpiar el StackPane y cargar el nuevo módulo
-            contenidoStackPane.getChildren().clear();
-            contenidoStackPane.getChildren().add(ingresosView);
-            System.out.println("Cargando módulo ingresos");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error al cargar el módulo de ingresos.");
+            System.out.println("Error al cargar el módulo de editar perfil.");
         }
     }
 
