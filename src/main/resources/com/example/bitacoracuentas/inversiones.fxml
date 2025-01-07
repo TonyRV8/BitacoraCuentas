@@ -9,11 +9,11 @@
         <!-- Tabla de Inversiones -->
         <TableView fx:id="inversionesTable" layoutX="20.0" layoutY="20.0" prefHeight="300.0" prefWidth="650.0" style="-fx-background-color: #4C4C4C; -fx-border-radius: 5px;">
             <columns>
-                <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="200.0" style="-fx-text-fill: black; -fx-font-size: 14px;"/>
-                <TableColumn fx:id="colMonto" text="Monto" prefWidth="100.0" style="-fx-text-fill: black; -fx-font-size: 14px;"/>
-                <TableColumn fx:id="colRendimiento" text="Rendimiento Estimado" prefWidth="150.0" style="-fx-text-fill: black; -fx-font-size: 14px;"/>
-                <TableColumn fx:id="colFechaInicio" text="Fecha Inicio" prefWidth="100.0" style="-fx-text-fill: black; -fx-font-size: 14px;"/>
-                <TableColumn fx:id="colFechaFin" text="Fecha Fin" prefWidth="100.0" style="-fx-text-fill: black; -fx-font-size: 14px;"/>
+                <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="200.0" style="-fx-text-fill: black; -fx-font-size: 12px;"/>
+                <TableColumn fx:id="colMonto" text="Monto" prefWidth="100.0" style="-fx-text-fill: black; -fx-font-size: 12px;"/>
+                <TableColumn fx:id="colRendimiento" text="Rendimiento Estimado" prefWidth="150.0" style="-fx-text-fill: black; -fx-font-size: 12px;"/>
+                <TableColumn fx:id="colFechaInicio" text="Fecha Inicio" prefWidth="100.0" style="-fx-text-fill: black; -fx-font-size: 12px;"/>
+                <TableColumn fx:id="colFechaFin" text="Fecha Fin" prefWidth="100.0" style="-fx-text-fill: black; -fx-font-size: 12px;"/>
             </columns>
         </TableView>
 

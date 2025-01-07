@@ -7,23 +7,23 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.bitacoracuentas.PresupuestosController">
     <children>
         <!-- Campo para el consejo financiero -->
-        <Label text="Consejo Financiero:" layoutX="20.0" layoutY="20.0" />
-        <TextField fx:id="consejoFinancieroField" layoutX="150.0" layoutY="20.0" prefWidth="300.0" editable="false" />
+        <Label text="Consejo Financiero:" layoutX="20.0" layoutY="20.0" style="-fx-font-size: 16px; -fx-text-fill: #2B3A67;" />
+        <TextArea fx:id="consejoFinancieroField" layoutX="160.0" layoutY="20.0" prefWidth="400.0" prefHeight="120.0" editable="false" wrapText="true" style="-fx-font-size: 12px; -fx-background-color: #FFFFFF; -fx-text-fill: #4C4C4C;" />
 
         <!-- Contenedor de Listas y Botones -->
-        <HBox layoutY="70.0" spacing="50" layoutX="20.0">
+        <HBox layoutY="150.0" spacing="50" layoutX="20.0">
             <!-- Lista de Gastos Planeados -->
             <VBox spacing="10">
-                <Label text="Gastos Planeados" />
-                <ListView fx:id="gastosPlaneadosList" prefWidth="300" prefHeight="300" />
-                <Button fx:id="planearGastoButton" text="Planear Gasto" onAction="#planearGasto" />
+                <Label text="Gastos Planeados" style="-fx-font-size: 16px; -fx-text-fill: #2B3A67;" />
+                <ListView fx:id="gastosPlaneadosList" prefWidth="350" prefHeight="330" style="-fx-background-color: #FFFFFF; -fx-border-color: #2B3A67;" />
+                <Button fx:id="planearGastoButton" text="Planear Gasto" onAction="#planearGasto" style="-fx-background-color: #F2AF29; -fx-text-fill: #FFFFFF;" />
             </VBox>
 
             <!-- Lista de Ingresos Previstos -->
             <VBox spacing="10">
-                <Label text="Ingresos Previstos" />
-                <ListView fx:id="ingresosPrevistosList" prefWidth="300" prefHeight="300" />
-                <Button fx:id="preverIngresoButton" text="Prever Ingreso" onAction="#preverIngreso" />
+                <Label text="Ingresos Previstos" style="-fx-font-size: 16px; -fx-text-fill: #2B3A67;" />
+                <ListView fx:id="ingresosPrevistosList" prefWidth="350" prefHeight="330" style="-fx-background-color: #FFFFFF; -fx-border-color: #2B3A67;" />
+                <Button fx:id="preverIngresoButton" text="Prever Ingreso" onAction="#preverIngreso" style="-fx-background-color: #33A1FD; -fx-text-fill: #FFFFFF;" />
             </VBox>
         </HBox>
     </children>

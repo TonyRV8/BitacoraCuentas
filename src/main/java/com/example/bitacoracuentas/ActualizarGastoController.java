@@ -3,6 +3,8 @@ package com.example.bitacoracuentas;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +22,7 @@ public class ActualizarGastoController {
     private Label mensajeLabel;
 
     private int idPresupuesto;
+    private double montoUsadoActual;
 
     public void cargarDatos(int idPresupuesto) {
         this.idPresupuesto = idPresupuesto;
@@ -33,7 +36,8 @@ public class ActualizarGastoController {
             if (resultSet.next()) {
                 nombreGastoField.setText(resultSet.getString("nombre"));
                 montoTotalField.setText(String.valueOf(resultSet.getDouble("monto_total")));
-                montoUsadoField.setText(String.valueOf(resultSet.getDouble("monto_usado")));
+                montoUsadoActual = resultSet.getDouble("monto_usado");
+                montoUsadoField.setText(String.valueOf(montoUsadoActual));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,6 +51,11 @@ public class ActualizarGastoController {
 
         if (montoUsado > montoTotal) {
             mensajeLabel.setText("No puedes exceder el gasto.");
+            return;
+        }
+
+        if (montoUsado < montoUsadoActual) {
+            mensajeLabel.setText("El monto usado no puede ser menor al registrado anteriormente.");
             return;
         }
 
@@ -66,6 +75,8 @@ public class ActualizarGastoController {
 
             if (filasAfectadas > 0) {
                 mensajeLabel.setText("Gasto actualizado correctamente.");
+                cerrarVentana();
+                PresupuestosController.cargarPresupuestosDesdeBD();
             } else {
                 mensajeLabel.setText("Error al actualizar el gasto.");
             }
@@ -82,6 +93,10 @@ public class ActualizarGastoController {
         cargarDatos(id_Presupuesto); // Método para cargar los datos en los campos de texto
     }
 
-
+    private void cerrarVentana() {
+        Stage stage = (Stage) nombreGastoField.getScene().getWindow();
+        stage.close();
+    }
 
 }
+
