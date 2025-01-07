@@ -56,6 +56,9 @@ public class InicioController {
     private Button presupuestosButton;
 
 
+    @FXML
+    private Button editarButton;
+
 
     @FXML
     public void initialize() {
@@ -99,6 +102,7 @@ public class InicioController {
         deudasButton.setOnAction(event -> cargarModuloDeudas());
         inversionesButton.setOnAction(event -> cargarModuloInversiones());
         presupuestosButton.setOnAction(event -> cargarModuloPresupuestos());
+        editarButton.setOnAction(event -> cargarModuloEditarPerfil());
 
 
 
@@ -214,6 +218,25 @@ public class InicioController {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error al cargar el módulo de Inversiones.");
+        }
+    }
+
+    private void cargarModuloEditarPerfil() {
+        try {
+            // Cargar el archivo FXML del módulo de Editar Perfil
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/editarPerfil.fxml"));
+            Node editarPerfilView = loader.load();
+
+            // Obtener el controlador de Editar Perfil (si necesitas pasar datos, por ejemplo)
+            editarPerfilController editarPerfilController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(editarPerfilView);
+            System.out.println("Cargando módulo editar perfil.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de editar perfil.");
         }
     }
 
