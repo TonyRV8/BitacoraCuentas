@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.util.List;
 
@@ -52,12 +53,22 @@ public class InicioController {
 
     @FXML
     private Button inversionesButton;
+
     @FXML
     private Button presupuestosButton;
 
+    @FXML
+    private Button educacionButton;
+
+    @FXML
+    private Button analisisButton;
+
+    @FXML
+    private Button exportacionButton;
 
     @FXML
     private Button editarButton;
+
 
 
     @FXML
@@ -74,41 +85,65 @@ public class InicioController {
             stage.setY(event.getScreenY() - yOffset);
         });
 
-        // Encuentra todos los botones dentro del VBox
-        List<Button> buttons = sidebar.getChildren().filtered(node -> node instanceof Button)
-                .stream()
-                .map(node -> (Button) node) // Convierte explícitamente cada Node a Button
-                .toList(); // Convierte el resultado a un List<Button>
+        // Configuración inicial de eventos para cada botón
+        quincenaButton.setOnAction(event -> {
+            cargarModuloQuincena();
+            setActiveButton(quincenaButton);
+        });
+        ingresosButton.setOnAction(event -> {
+            cargarModuloIngresos();
+            setActiveButton(ingresosButton);
+        });
+        adeudosButton.setOnAction(event -> {
+            cargarModuloAdeudos();
+            setActiveButton(adeudosButton);
+        });
+        deudasButton.setOnAction(event -> {
+            cargarModuloDeudas();
+            setActiveButton(deudasButton);
+        });
+        inversionesButton.setOnAction(event -> {
+            cargarModuloInversiones();
+            setActiveButton(inversionesButton);
+        });
+        presupuestosButton.setOnAction(event -> {
+            cargarModuloPresupuestos();
+            setActiveButton(presupuestosButton);
+        });
+        educacionButton.setOnAction(event -> {
+            cargarModuloConsejos();
+            setActiveButton(educacionButton);
+        });
+        editarButton.setOnAction(event -> {
+            cargarModuloEditarPerfil();
+            setActiveButton(editarButton);
+        });
+        analisisButton.setOnAction(event -> {
+            cargarModuloAnalisis();
+            setActiveButton(analisisButton);
+        });
+        exportacionButton.setOnAction(event -> {
+            cargarModuloExportar();
+            setActiveButton(exportacionButton);
+        });
 
-        // Agrega el comportamiento de "estado activo" a cada botón
-        for (Button button : buttons) {
-            button.setOnAction(event -> setActiveButton(button));
-        }
+        // Configurar el evento del botón logout
+        logoutButton.setOnAction(event -> logout());
+
+
     }
 
     private void setActiveButton(Button button) {
-        // Quita la clase "active" del botón actualmente activo
+        // Quitar la clase "active" del botón actualmente activo
         if (activeButton != null) {
             activeButton.getStyleClass().remove("active");
         }
 
-        // Establece el nuevo botón como activo
+        // Establecer el nuevo botón como activo
         button.getStyleClass().add("active");
         activeButton = button;
-
-        quincenaButton.setOnAction(event -> cargarModuloQuincena());
-        ingresosButton.setOnAction(event -> cargarModuloIngresos());
-        adeudosButton.setOnAction(event -> cargarModuloAdeudos());
-        deudasButton.setOnAction(event -> cargarModuloDeudas());
-        inversionesButton.setOnAction(event -> cargarModuloInversiones());
-        presupuestosButton.setOnAction(event -> cargarModuloPresupuestos());
-        editarButton.setOnAction(event -> cargarModuloEditarPerfil());
-
-
-
-        // Configurar el evento del botón logout
-        logoutButton.setOnAction(event -> logout());
     }
+
 
     private void cargarModuloQuincena() {
         try {
@@ -221,6 +256,26 @@ public class InicioController {
         }
     }
 
+    private void cargarModuloConsejos() {
+        try {
+            // Cargar el archivo FXML del módulo de consejos
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/consejos.fxml"));
+            Node consejosView = loader.load();
+
+            // Obtener el controlador de Consejos
+            ConsejosController consejosController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(consejosView);
+            System.out.println("Cargando módulo de consejos.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de consejos.");
+        }
+    }
+
+
     private void cargarModuloEditarPerfil() {
         try {
             // Cargar el archivo FXML del módulo de Editar Perfil
@@ -239,6 +294,50 @@ public class InicioController {
             System.out.println("Error al cargar el módulo de editar perfil.");
         }
     }
+
+    private void cargarModuloAnalisis() {
+        try {
+            // Cargar el archivo FXML del módulo de análisis
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/analisis.fxml"));
+            Node analisisView = loader.load();
+
+            // Obtener el controlador del módulo
+            AnalisisController analisisController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(analisisView);
+
+            // Imprimir mensaje en consola
+            System.out.println("Cargando módulo de análisis de tendencias financieras");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de análisis de tendencias financieras.");
+        }
+    }
+
+    private void cargarModuloExportar() {
+        try {
+            // Cargar el archivo FXML del módulo de exportación
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/exportar.fxml"));
+            Node exportarView = loader.load();
+
+            // Obtener el controlador del módulo
+            ExportarController exportarController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(exportarView);
+
+            // Imprimir mensaje en consola
+            System.out.println("Cargando módulo de exportación de datos");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de exportación de datos.");
+        }
+    }
+
+
 
 
 

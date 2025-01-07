@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 
 public class QuincenaController {
 
@@ -57,6 +58,10 @@ public class QuincenaController {
     private Label aviso2Label;
 
     @FXML
+    private Label avisoLabel; // Nuevo label para mostrar mensajes
+
+
+    @FXML
     private Button guardarButton;
 
     private double saldoTotal = 0.0;
@@ -65,6 +70,7 @@ public class QuincenaController {
     @FXML
     public void initialize() {
         System.out.println("QuincenaController inicializado.");
+        cargarDatosGuardados(); // Cargar datos al entrar al módulo
 
         // Listener para el saldo total
         saldoField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -257,6 +263,8 @@ public class QuincenaController {
                 guardarAsignacion(statementAsignaciones, "Presupuestos", presupuestosPorcentaje);
             }
 
+            // Insertar un ingreso con la categoría "Quincena"
+            insertarIngresoQuincena(connection);
 
             System.out.println("Datos guardados exitosamente en la base de datos.");
         } catch (Exception e) {
@@ -264,6 +272,71 @@ public class QuincenaController {
             System.out.println("Error al guardar en la base de datos.");
         }
     }
+
+    private void insertarIngresoQuincena(Connection connection) {
+        try {
+            // Calcular el monto proporcional para ingresos
+            double montoIngresos = Double.parseDouble(ingresosTotal.getText().trim());
+            if (montoIngresos > 0) {
+                // Obtener el ID de la categoría personalizada "Quincena" para el usuario actual
+                int categoriaId = obtenerOCrearCategoriaUsuario(connection, "Quincena", "Ingresos");
+
+                if (categoriaId != -1) {
+                    // Insertar el ingreso
+                    String insertIngresoQuery = "INSERT INTO ingresos (usuario_id, categoria_id, descripcion, monto, fecha_ingreso) " +
+                            "VALUES (?, ?, ?, ?, ?)";
+                    try (PreparedStatement insertIngresoStatement = connection.prepareStatement(insertIngresoQuery)) {
+                        insertIngresoStatement.setInt(1, Session.getUsuarioId());
+                        insertIngresoStatement.setInt(2, categoriaId);
+                        insertIngresoStatement.setString(3, "Ingreso de Quincena");
+                        insertIngresoStatement.setDouble(4, montoIngresos);
+                        insertIngresoStatement.setDate(5, java.sql.Date.valueOf(LocalDate.now()));
+                        insertIngresoStatement.executeUpdate();
+                        System.out.println("Ingreso de Quincena registrado correctamente.");
+                    }
+                } else {
+                    System.out.println("Error al obtener o crear la categoría 'Quincena'.");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al insertar el ingreso de quincena.");
+        }
+    }
+
+    private int obtenerOCrearCategoriaUsuario(Connection connection, String nombreCategoria, String tipoCategoria) {
+        try {
+            // Buscar la categoría personalizada en la tabla `categorias` para el usuario actual
+            String queryBuscarCategoria = "SELECT id_categorias FROM categorias WHERE usuario_id = ? AND nombre = ?";
+            try (PreparedStatement buscarStatement = connection.prepareStatement(queryBuscarCategoria)) {
+                buscarStatement.setInt(1, Session.getUsuarioId());
+                buscarStatement.setString(2, nombreCategoria);
+                try (ResultSet resultSet = buscarStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getInt("id_categorias"); // Retornar el ID si ya existe
+                    }
+                }
+            }
+
+            // Crear la categoría personalizada si no existe
+            String queryCrearCategoria = "INSERT INTO categorias (usuario_id, nombre, tipo) VALUES (?, ?, ?) RETURNING id_categorias";
+            try (PreparedStatement crearStatement = connection.prepareStatement(queryCrearCategoria)) {
+                crearStatement.setInt(1, Session.getUsuarioId());
+                crearStatement.setString(2, nombreCategoria);
+                crearStatement.setString(3, tipoCategoria);
+                try (ResultSet resultSet = crearStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getInt("id_categorias"); // Retornar el ID recién creado
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al obtener o crear la categoría personalizada.");
+        }
+        return -1; // Retornar -1 si ocurre un error
+    }
+
 
 
 
@@ -277,10 +350,57 @@ public class QuincenaController {
         }
     }
 
+    private void cargarDatosGuardados() {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String query = "SELECT saldo, monto_a_separar, saldo_sobrante FROM saldo_quincena WHERE usuario_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, Session.getUsuarioId());
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        saldoTotal = resultSet.getDouble("saldo");
+                        montoSeparar = resultSet.getDouble("monto_a_separar");
+                        double saldoSobrante = resultSet.getDouble("saldo_sobrante");
 
+                        saldoField.setText(String.format("%.2f", saldoTotal));
+                        separarField.setText(String.format("%.2f", montoSeparar));
+                        sobranteLabel.setText(String.format("%.2f", saldoSobrante));
+                    }
+                }
+            }
 
+            String queryAsignaciones = "SELECT modulo, porcentaje FROM configuracion_asignaciones WHERE usuario_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(queryAsignaciones)) {
+                statement.setInt(1, Session.getUsuarioId());
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        String modulo = resultSet.getString("modulo");
+                        double porcentaje = resultSet.getDouble("porcentaje");
+                        switch (modulo) {
+                            case "Ingresos" -> ingresosPorcentaje.setText(String.format("%.2f", porcentaje));
+                            case "Adeudos" -> adeudosPorcentaje.setText(String.format("%.2f", porcentaje));
+                            case "Deudas" -> deudasPorcentaje.setText(String.format("%.2f", porcentaje));
+                            case "Inversiones" -> inversionesPorcentaje.setText(String.format("%.2f", porcentaje));
+                            case "Presupuestos" -> presupuestosPorcentaje.setText(String.format("%.2f", porcentaje));
+                        }
+                    }
+                }
+            }
 
+            setAviso("Datos cargados correctamente.", "success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            setAviso("Error al cargar los datos guardados.", "error");
+        }
+    }
 
-
+    private void setAviso(String mensaje, String tipo) {
+        avisoLabel.setText(mensaje);
+        switch (tipo) {
+            case "success" -> avisoLabel.setStyle("-fx-text-fill: green;");
+            case "error" -> avisoLabel.setStyle("-fx-text-fill: red;");
+            case "warning" -> avisoLabel.setStyle("-fx-text-fill: orange;");
+            case "info" -> avisoLabel.setStyle("-fx-text-fill: blue;");
+        }
+    }
 
 }

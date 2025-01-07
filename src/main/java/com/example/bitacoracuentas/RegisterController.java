@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
@@ -45,6 +47,30 @@ public class RegisterController {
 
     @FXML
     private Button cancelButton;
+
+    @FXML
+    private AnchorPane leftPane; // Panel para mover la ventana
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    @FXML
+    public void initialize() {
+        // Configurar movimiento de la ventana con el leftPane
+        leftPane.setOnMousePressed(this::handleMousePressed);
+        leftPane.setOnMouseDragged(this::handleMouseDragged);
+    }
+
+    private void handleMousePressed(MouseEvent event) {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+
+    private void handleMouseDragged(MouseEvent event) {
+        Stage stage = (Stage) leftPane.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+    }
 
     @FXML
     public void registerButtonOnAction(ActionEvent event) {

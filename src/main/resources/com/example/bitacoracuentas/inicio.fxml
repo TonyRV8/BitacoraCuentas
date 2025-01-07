@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -16,11 +14,6 @@
          <children>
             <Label layoutX="25.0" layoutY="13.0" text="Dashboard" />
             <Label layoutX="541.0" layoutY="13.0" />
-            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="1011.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/close.png" />
-               </image>
-            </ImageView>
          </children>
       </Pane>
    </top>
@@ -36,6 +29,7 @@
                   <Button fx:id="inversionesButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Inversiones" />
                   <Button fx:id="presupuestosButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Presupuestos" />
                   <Button fx:id="exportacionButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Exportación de datos" />
+                  <Button fx:id="analisisButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Analisis de Tendencias" />
                   <Button fx:id="educacionButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Educación Financiera" />
                   <Button fx:id="editarButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Editar Perfil" textFill="WHITE" />
                   <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="flat-button" text="Cerrar Sesión" textFill="WHITE" />

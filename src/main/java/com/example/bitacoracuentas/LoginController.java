@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -26,6 +28,30 @@ public class LoginController {
     private TextField userField;
     @FXML
     private PasswordField passwordField;
+
+    @FXML
+    private AnchorPane leftPane; // Panel para mover la ventana
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    @FXML
+    public void initialize() {
+        // Configurar movimiento de la ventana con el leftPane
+        leftPane.setOnMousePressed(this::handleMousePressed);
+        leftPane.setOnMouseDragged(this::handleMouseDragged);
+    }
+
+    private void handleMousePressed(MouseEvent event) {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+
+    private void handleMouseDragged(MouseEvent event) {
+        Stage stage = (Stage) leftPane.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+    }
 
     public void loginButtonOnAction(ActionEvent e) {
         String username = userField.getText();
