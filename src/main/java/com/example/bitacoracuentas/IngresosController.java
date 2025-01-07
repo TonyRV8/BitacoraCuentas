@@ -59,6 +59,8 @@ public class IngresosController {
     @FXML
     private Button cancelarIngresoButton;
 
+    @FXML
+    private Label avisoLabel; // Nuevo label para mostrar mensajes
 
     private ObservableList<Ingreso> ingresosList;
     private Ingreso ingresoEnEdicion = null; // Variable para rastrear el ingreso en edición
@@ -113,10 +115,14 @@ public class IngresosController {
                 }
 
                 System.out.println("Ingresos cargados correctamente.");
+                setAviso("Ingresos cargados correctamente.", "success");
+
             }
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error al cargar los ingresos.");
+            setAviso("Error al cargar los ingresos.", "error");
+
         }
     }
 
@@ -167,6 +173,8 @@ public class IngresosController {
 
             if (descripcion.isEmpty() || categoria == null || monto <= 0) {
                 System.out.println("Por favor, completa todos los campos correctamente.");
+                setAviso("Por favor completa todos los campos correctamente.", "warning");
+
                 return;
             }
 
@@ -187,8 +195,12 @@ public class IngresosController {
             ingresoEnEdicion = null;
 
             System.out.println("Ingreso guardado correctamente.");
+            setAviso("Ingreso guardado correctamente", "success");
+
         } catch (NumberFormatException e) {
             System.out.println("Por favor, ingresa un monto válido.");
+            setAviso("Ingresa un monto válido.", "warning");
+
         }
     }
 
@@ -360,6 +372,8 @@ public class IngresosController {
         // Eliminar temporalmente el ingreso de la tabla
         ingresosList.remove(ingreso);
         System.out.println("Editando ingreso: " + ingreso.getDescripcion());
+        setAviso("Editando ingreso", "info");
+
     }
 
     private void eliminarIngreso(Ingreso ingreso) {
@@ -373,9 +387,13 @@ public class IngresosController {
 
             ingresosList.remove(ingreso);
             System.out.println("Ingreso eliminado: " + ingreso.getDescripcion());
+            setAviso("Ingreso eliminado", "success");
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error al eliminar el ingreso.");
+            setAviso("Error al eliminar el ingreso", "warning");
+
         }
     }
 
@@ -386,7 +404,8 @@ public class IngresosController {
 
             // Configurar el controlador de la nueva categoría
             CategoriaController categoriaController = loader.getController();
-            categoriaController.setIngresosController(this); // Pasar referencia al controlador actual
+            categoriaController.setTipoCategoria("Ingresos"); // Fijar el tipo de categoría
+            categoriaController.setIngresosController(this);  // Pasar referencia al controlador actual
 
             Stage stage = new Stage();
             stage.setTitle("Nueva Categoría");
@@ -397,6 +416,7 @@ public class IngresosController {
             System.out.println("Error al abrir la ventana de nueva categoría.");
         }
     }
+
 
     @FXML
     private void cancelarIngreso() {
@@ -409,5 +429,15 @@ public class IngresosController {
         ingresoEnEdicion = null;
 
         System.out.println("Formulario restablecido.");
+    }
+
+    private void setAviso(String mensaje, String tipo) {
+        avisoLabel.setText(mensaje);
+        switch (tipo) {
+            case "success" -> avisoLabel.setStyle("-fx-text-fill: green;");
+            case "error" -> avisoLabel.setStyle("-fx-text-fill: red;");
+            case "warning" -> avisoLabel.setStyle("-fx-text-fill: orange;");
+            case "info" -> avisoLabel.setStyle("-fx-text-fill: blue;");
+        }
     }
 }

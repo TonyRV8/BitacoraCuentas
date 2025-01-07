@@ -23,25 +23,37 @@ public class CategoriaController {
     @FXML
     private Button cancelarButton;
 
-    private IngresosController ingresosController; // Referencia al controlador principal
-
-    public void setIngresosController(IngresosController controller) {
-        this.ingresosController = controller;
-    }
+    private String tipoCategoria; // Tipo de categoría: "Ingresos" o "Adeudos"
+    private IngresosController ingresosController; // Referencia al controlador de ingresos
+    private AdeudosController adeudosController;   // Referencia al controlador de adeudos
 
     @FXML
     public void initialize() {
-        // Cargar opciones en el ComboBox
-        tipoCategoriaComboBox.getItems().addAll("Ingresos", "Adeudos");
+        // Cargar opciones en el ComboBox si no se establece un tipo de categoría
+        if (tipoCategoriaComboBox != null && tipoCategoria == null) {
+            tipoCategoriaComboBox.getItems().addAll("Ingresos", "Adeudos");
+        }
 
         // Configurar eventos de los botones
         guardarButton.setOnAction(event -> guardarCategoria());
         cancelarButton.setOnAction(event -> cerrarVentana());
     }
 
+    public void setTipoCategoria(String tipoCategoria) {
+        this.tipoCategoria = tipoCategoria;
+    }
+
+    public void setIngresosController(IngresosController controller) {
+        this.ingresosController = controller;
+    }
+
+    public void setAdeudosController(AdeudosController controller) {
+        this.adeudosController = controller;
+    }
+
     private void guardarCategoria() {
         String nombre = nombreCategoriaField.getText();
-        String tipo = tipoCategoriaComboBox.getValue();
+        String tipo = tipoCategoria != null ? tipoCategoria : tipoCategoriaComboBox.getValue();
 
         if (nombre == null || nombre.isEmpty() || tipo == null) {
             System.out.println("Por favor, completa todos los campos.");
@@ -59,9 +71,11 @@ public class CategoriaController {
             statement.executeUpdate();
             System.out.println("Nueva categoría guardada: " + nombre);
 
-            // Notificar al controlador principal para recargar categorías
+            // Notificar al controlador correspondiente
             if (ingresosController != null) {
                 ingresosController.cargarCategorias();
+            } else if (adeudosController != null) {
+                adeudosController.cargarCategorias();
             }
 
             cerrarVentana();

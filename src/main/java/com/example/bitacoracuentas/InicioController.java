@@ -44,6 +44,11 @@ public class InicioController {
     @FXML
     private Button ingresosButton;
 
+    @FXML
+    private Button adeudosButton;
+
+    @FXML
+    private Button deudasButton;
 
 
     @FXML
@@ -84,6 +89,10 @@ public class InicioController {
 
         quincenaButton.setOnAction(event -> cargarModuloQuincena());
         ingresosButton.setOnAction(event -> cargarModuloIngresos());
+        adeudosButton.setOnAction(event -> cargarModuloAdeudos());
+        deudasButton.setOnAction(event -> cargarModuloDeudas());
+
+
         // Configurar el evento del botón logout
         logoutButton.setOnAction(event -> logout());
     }
@@ -126,6 +135,45 @@ public class InicioController {
             System.out.println("Error al cargar el módulo de ingresos.");
         }
     }
+
+    private void cargarModuloAdeudos() {
+        try {
+            // Cargar el archivo FXML del módulo de adeudos
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/adeudos.fxml"));
+            Node adeudosView = loader.load();
+
+            // Obtener el controlador de Adeudos
+            AdeudosController adeudosController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(adeudosView);
+            System.out.println("Cargando módulo adeudos");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de adeudos.");
+        }
+    }
+
+    private void cargarModuloDeudas() {
+        try {
+            // Cargar el archivo FXML del módulo de deudas
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/deudas.fxml"));
+            Node deudasView = loader.load();
+
+            // Obtener el controlador de Deudas
+            DeudasController deudasController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(deudasView);
+            System.out.println("Cargando módulo deudas");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de deudas.");
+        }
+    }
+
 
 
 
