@@ -17,6 +17,7 @@ import java.util.List;
 
 public class InicioController {
 
+
     @FXML
     private Pane topPane; // Pane superior para mover la ventana
 
@@ -45,7 +46,8 @@ public class InicioController {
     private Button ingresosButton;
     @FXML
     private Button inversionesButton;
-
+    @FXML
+    private Button presupuestosButton;
 
 
     @FXML
@@ -87,8 +89,25 @@ public class InicioController {
         quincenaButton.setOnAction(event -> cargarModuloQuincena());
         ingresosButton.setOnAction(event -> cargarModuloIngresos());
         inversionesButton.setOnAction(event -> cargarModuloInversiones());
+        presupuestosButton.setOnAction(event -> cargarModuloPresupuestos());
         // Configurar el evento del botón logout
         logoutButton.setOnAction(event -> logout());
+    }
+
+    private void cargarModuloPresupuestos() {
+        try {
+            // Cargar el archivo FXML del módulo de inversiones
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/presupuestos.fxml"));
+            Node presupuestosView = loader.load();
+            PresupuestosController presupuestosController = loader.getController();
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(presupuestosView);
+            System.out.println("Cargando módulo presupuestos");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de presupuestos.");
+        }
     }
 
     private void cargarModuloInversiones() {
