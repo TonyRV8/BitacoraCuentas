@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.bitacoracuentas.PresupuestosController">
+    <children>
+        <!-- Campo para el consejo financiero -->
+        <Label text="Consejo Financiero:" layoutX="20.0" layoutY="20.0" />
+        <TextField fx:id="consejoFinancieroField" layoutX="150.0" layoutY="20.0" prefWidth="300.0" editable="false" />
+
+        <!-- Contenedor de Listas y Botones -->
+        <HBox layoutY="70.0" spacing="50" layoutX="20.0">
+            <!-- Lista de Gastos Planeados -->
+            <VBox spacing="10">
+                <Label text="Gastos Planeados" />
+                <ListView fx:id="gastosPlaneadosList" prefWidth="300" prefHeight="300" />
+                <Button fx:id="planearGastoButton" text="Planear Gasto" onAction="#planearGasto" />
+            </VBox>
+
+            <!-- Lista de Ingresos Previstos -->
+            <VBox spacing="10">
+                <Label text="Ingresos Previstos" />
+                <ListView fx:id="ingresosPrevistosList" prefWidth="300" prefHeight="300" />
+                <Button fx:id="preverIngresoButton" text="Prever Ingreso" onAction="#preverIngreso" />
+            </VBox>
+        </HBox>
+    </children>
+</AnchorPane>

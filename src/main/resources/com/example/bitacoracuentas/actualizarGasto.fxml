@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.bitacoracuentas.ActualizarGastoController">
+    <Label text="Actualizar Gasto"/>
+
+    <Label text="Nombre del Gasto:"/>
+    <TextField fx:id="nombreGastoField" editable="false"/>
+
+    <Label text="Monto Total:"/>
+    <TextField fx:id="montoTotalField"/>
+
+    <Label text="Monto Usado:"/>
+    <TextField fx:id="montoUsadoField"/>
+
+    <Button text="Guardar Cambios" onAction="#guardarCambios"/>
+    <Label fx:id="mensajeLabel" textFill="red"/>
+</VBox>

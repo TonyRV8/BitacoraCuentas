@@ -50,6 +50,12 @@ public class InicioController {
     @FXML
     private Button deudasButton;
 
+    @FXML
+    private Button inversionesButton;
+    @FXML
+    private Button presupuestosButton;
+
+
 
     @FXML
     public void initialize() {
@@ -91,6 +97,9 @@ public class InicioController {
         ingresosButton.setOnAction(event -> cargarModuloIngresos());
         adeudosButton.setOnAction(event -> cargarModuloAdeudos());
         deudasButton.setOnAction(event -> cargarModuloDeudas());
+        inversionesButton.setOnAction(event -> cargarModuloInversiones());
+        presupuestosButton.setOnAction(event -> cargarModuloPresupuestos());
+
 
 
         // Configurar el evento del botón logout
@@ -174,6 +183,39 @@ public class InicioController {
         }
     }
 
+    private void cargarModuloPresupuestos() {
+        try {
+            // Cargar el archivo FXML del módulo de inversiones
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/presupuestos.fxml"));
+            Node presupuestosView = loader.load();
+            PresupuestosController presupuestosController = loader.getController();
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(presupuestosView);
+            System.out.println("Cargando módulo presupuestos");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de presupuestos.");
+        }
+    }
+
+    private void cargarModuloInversiones() {
+        try {
+            // Cargar el archivo FXML del módulo de inversiones
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bitacoracuentas/inversiones.fxml"));
+            Node inversionesView = loader.load();
+
+            InversionesController inversionesController = loader.getController();
+
+            // Limpiar el StackPane y cargar el nuevo módulo
+            contenidoStackPane.getChildren().clear();
+            contenidoStackPane.getChildren().add(inversionesView);
+            System.out.println("Cargando módulo Inversiones");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar el módulo de Inversiones.");
+        }
+    }
 
 
 

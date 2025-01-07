@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.bitacoracuentas.InversionesController">
+    <children>
+        <!-- Tabla de Inversiones -->
+        <TableView fx:id="inversionesTable" layoutX="20.0" layoutY="20.0" prefHeight="300.0" prefWidth="650.0" style="-fx-background-color: #4C4C4C; -fx-border-radius: 5px;">
+            <columns>
+                <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="200.0" style="-fx-text-fill: black; -fx-font-size: 14px;"/>
+                <TableColumn fx:id="colMonto" text="Monto" prefWidth="100.0" style="-fx-text-fill: black; -fx-font-size: 14px;"/>
+                <TableColumn fx:id="colRendimiento" text="Rendimiento Estimado" prefWidth="150.0" style="-fx-text-fill: black; -fx-font-size: 14px;"/>
+                <TableColumn fx:id="colFechaInicio" text="Fecha Inicio" prefWidth="100.0" style="-fx-text-fill: black; -fx-font-size: 14px;"/>
+                <TableColumn fx:id="colFechaFin" text="Fecha Fin" prefWidth="100.0" style="-fx-text-fill: black; -fx-font-size: 14px;"/>
+            </columns>
+        </TableView>
+
+        <!-- Botón para agregar inversión -->
+        <Button fx:id="insertarButton" text="Agregar Inversión" layoutX="240.0" layoutY="330.0" onAction="#abrirFormularioInsercion"
+                style="-fx-background-color: #33A1FD; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 5px; -fx-background-radius: 5px;"/>
+    </children>
+</AnchorPane>
+
