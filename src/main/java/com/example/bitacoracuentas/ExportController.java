@@ -65,11 +65,14 @@ public class ExportController {
 
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
+            ObservableList<String> periodos;
+            if (resultSet.next() && resultSet.getDate("fecha_minima") != null) {
                 LocalDate fechaMinima = resultSet.getDate("fecha_minima").toLocalDate();
-                ObservableList<String> periodos = generarPeriodosDesde(fechaMinima);
-                periodoComboBox.setItems(periodos);
+                periodos = generarPeriodosDesde(fechaMinima);
+            } else {
+                periodos = generarPeriodosDesde(LocalDate.now());
             }
+            periodoComboBox.setItems(periodos);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,11 +84,17 @@ public class ExportController {
         LocalDate fechaActual = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
 
-        while (!fechaActual.isBefore(fechaMinima)) {
+        if (fechaMinima.equals(fechaActual)) {
             YearMonth mes = YearMonth.from(fechaActual);
-            periodos.add("2da Quincena " + mes.format(formatter));
-            periodos.add("1ra Quincena " + mes.format(formatter));
-            fechaActual = fechaActual.minusMonths(1);
+            periodos.add("2daQuincena " + mes.format(formatter));
+            periodos.add("1raQuincena " + mes.format(formatter));
+        } else {
+            while (!fechaActual.isBefore(fechaMinima)) {
+                YearMonth mes = YearMonth.from(fechaActual);
+                periodos.add("2daQuincena " + mes.format(formatter));
+                periodos.add("1raQuincena " + mes.format(formatter));
+                fechaActual = fechaActual.minusMonths(1);
+            }
         }
 
         return FXCollections.observableArrayList(periodos);

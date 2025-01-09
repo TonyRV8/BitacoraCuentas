@@ -4,18 +4,14 @@ import com.itextpdf.text.pdf.PdfWriter;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.stage.FileChooser;
-import jdk.internal.foreign.SystemLookup;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;  // Importación correcta
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Element;
-
 import com.itextpdf.text.pdf.PdfPTable;
-
-
 
 import java.io.*;
 import java.sql.*;
@@ -49,21 +45,21 @@ public class ExportarDatos {
             LocalDate fechaFin = periodo.atEndOfMonth();
 
             // Determinar si es la primera o segunda quincena
-            if (periodoSeleccionado.contains("1ra Quincena")) {
+            if (periodoSeleccionado.contains("1raQuincena")) {
                 fechaInicio = periodo.atDay(1); // 1 al 15
                 fechaFin = periodo.atDay(15);
-            } else if (periodoSeleccionado.contains("2da Quincena")) {
+            } else if (periodoSeleccionado.contains("2daQuincena")) {
                 fechaInicio = periodo.atDay(16); // 16 al final del mes
                 fechaFin = periodo.atEndOfMonth();
             }
 
-            // Verifica el formato seleccionado (CSV o Excel) y llama a la función correspondiente
+            // Verifica el formato seleccionado (CSV, Excel o PDF) y llama a la función correspondiente
             if (archivoSeleccionado.getText().equalsIgnoreCase("CSV")) {
                 exportarCSV(connection, tablas, fechaInicio, fechaFin);
             } else if (archivoSeleccionado.getText().equalsIgnoreCase("Excel")) {
                 exportarExcel(connection, tablas, fechaInicio, fechaFin);
-            } else if (archivoSeleccionado.getText().equalsIgnoreCase("PDF")){
-            exportarPDF(connection, tablas, fechaInicio, fechaFin);
+            } else if (archivoSeleccionado.getText().equalsIgnoreCase("PDF")) {
+                exportarPDF(connection, tablas, fechaInicio, fechaFin);
             }
 
         } catch (SQLException e) {
@@ -79,24 +75,23 @@ public class ExportarDatos {
         if (file != null) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (String tabla : tablas) {
-                    String query = "SELECT * FROM " + tabla;
+                    String query = "SELECT * FROM " + tabla + " WHERE usuario_id = ?";
 
                     if (tabla.equals("presupuestos")) {
-                        query += " WHERE fecha_fin BETWEEN ? AND ?";
-                    } else if (tabla.equals("saldo_quincena")) {
-                        query += " WHERE usuario_id IS NOT NULL";
+                        query += " AND fecha_fin BETWEEN ? AND ?";
                     } else if (tabla.equals("inversiones")) {
-                        query += " WHERE fecha_fin BETWEEN ? AND ?";
+                        query += " AND fecha_fin BETWEEN ? AND ?";
                     } else if (tabla.equals("adeudos")) {
-                        query += " WHERE fecha_vencimiento BETWEEN ? AND ?";
+                        query += " AND fecha_vencimiento BETWEEN ? AND ?";
                     } else if (tabla.equals("ingresos")) {
-                        query += " WHERE fecha_ingreso BETWEEN ? AND ?";
+                        query += " AND fecha_ingreso BETWEEN ? AND ?";
                     }
 
                     try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                        stmt.setInt(1, Session.getUsuarioId());
                         if (!tabla.equals("saldo_quincena")) {
-                            stmt.setDate(1, Date.valueOf(fechaInicio));
-                            stmt.setDate(2, Date.valueOf(fechaFin));
+                            stmt.setDate(2, Date.valueOf(fechaInicio));
+                            stmt.setDate(3, Date.valueOf(fechaFin));
                         }
 
                         try (ResultSet rs = stmt.executeQuery()) {
@@ -157,24 +152,23 @@ public class ExportarDatos {
 
                 for (String tabla : tablas) {
                     Sheet sheet = workbook.createSheet(tabla);
-                    String query = "SELECT * FROM " + tabla;
+                    String query = "SELECT * FROM " + tabla + " WHERE usuario_id = ?";
 
                     if (tabla.equals("presupuestos")) {
-                        query += " WHERE fecha_fin BETWEEN ? AND ?";
-                    } else if (tabla.equals("saldo_quincena")) {
-                        query += " WHERE usuario_id IS NOT NULL";
+                        query += " AND fecha_fin BETWEEN ? AND ?";
                     } else if (tabla.equals("inversiones")) {
-                        query += " WHERE fecha_fin BETWEEN ? AND ?";
+                        query += " AND fecha_fin BETWEEN ? AND ?";
                     } else if (tabla.equals("adeudos")) {
-                        query += " WHERE fecha_vencimiento BETWEEN ? AND ?";
+                        query += " AND fecha_vencimiento BETWEEN ? AND ?";
                     } else if (tabla.equals("ingresos")) {
-                        query += " WHERE fecha_ingreso BETWEEN ? AND ?";
+                        query += " AND fecha_ingreso BETWEEN ? AND ?";
                     }
 
                     try (PreparedStatement statement = connection.prepareStatement(query)) {
+                        statement.setInt(1, Session.getUsuarioId());
                         if (!tabla.equals("saldo_quincena")) {
-                            statement.setDate(1, Date.valueOf(fechaInicio));
-                            statement.setDate(2, Date.valueOf(fechaFin));
+                            statement.setDate(2, Date.valueOf(fechaInicio));
+                            statement.setDate(3, Date.valueOf(fechaFin));
                         }
 
                         try (ResultSet resultSet = statement.executeQuery()) {
@@ -210,6 +204,7 @@ public class ExportarDatos {
             }
         }
     }
+
     public void exportarPDF(Connection connection, List<String> tablas, LocalDate fechaInicio, LocalDate fechaFin) throws SQLException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
@@ -219,7 +214,6 @@ public class ExportarDatos {
         if (file != null) {
             try (FileOutputStream fileOut = new FileOutputStream(file)) {
                 Document document = new Document();
-                // Correcta inicialización de PdfWriter
                 PdfWriter.getInstance(document, fileOut);
                 document.open();
 
@@ -229,24 +223,25 @@ public class ExportarDatos {
                     titulo.setAlignment(Element.ALIGN_CENTER);
                     document.add(titulo);
 
-                    String query = "SELECT * FROM " + tabla;
+                    String query = "SELECT * FROM " + tabla + " WHERE usuario_id = ?";
 
                     if (tabla.equals("presupuestos")) {
-                        query += " WHERE fecha_fin BETWEEN ? AND ?";
+                        query += " AND fecha_fin BETWEEN ? AND ?";
                     } else if (tabla.equals("saldo_quincena")) {
-                        query += " WHERE usuario_id IS NOT NULL";
+                        query += " AND usuario_id IS NOT NULL";
                     } else if (tabla.equals("inversiones")) {
-                        query += " WHERE fecha_fin BETWEEN ? AND ?";
+                        query += " AND fecha_fin BETWEEN ? AND ?";
                     } else if (tabla.equals("adeudos")) {
-                        query += " WHERE fecha_vencimiento BETWEEN ? AND ?";
+                        query += " AND fecha_vencimiento BETWEEN ? AND ?";
                     } else if (tabla.equals("ingresos")) {
-                        query += " WHERE fecha_ingreso BETWEEN ? AND ?";
+                        query += " AND fecha_ingreso BETWEEN ? AND ?";
                     }
 
                     try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                        stmt.setInt(1, Session.getUsuarioId());
                         if (!tabla.equals("saldo_quincena")) {
-                            stmt.setDate(1, Date.valueOf(fechaInicio));
-                            stmt.setDate(2, Date.valueOf(fechaFin));
+                            stmt.setDate(2, Date.valueOf(fechaInicio));
+                            stmt.setDate(3, Date.valueOf(fechaFin));
                         }
 
                         try (ResultSet rs = stmt.executeQuery()) {

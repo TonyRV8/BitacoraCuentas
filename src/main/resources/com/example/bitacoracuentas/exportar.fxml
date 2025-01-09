@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
-<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
+<VBox spacing="20" alignment="CENTER" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.bitacoracuentas.ExportController">
+      fx:controller="com.example.bitacoracuentas.ExportController"
+      style="-fx-background-color: #FFFFFF; -fx-padding: 20;">
 
-    <Label text="Módulo de exportación de datos" />
+    <!-- Título -->
+    <Label text="Módulo de exportación de datos"
+           style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2B3A67;"/>
 
-    <!-- Selección de Periodo -->
-    <HBox spacing="10">
-        <Label text="Periodo:" />
-        <ComboBox fx:id="periodoComboBox" />
-    </HBox>
+    <!-- Contenedor principal -->
+    <GridPane alignment="CENTER" hgap="20" vgap="10">
+        <!-- Selección de Periodo -->
+        <Label text="Periodo:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+               style="-fx-text-fill: #4C4C4C;"/>
+        <ComboBox fx:id="periodoComboBox" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                  style="-fx-background-color: #FFFFFF; -fx-border-color: #2B3A67; -fx-border-radius: 5; -fx-padding: 5;"/>
 
-    <!-- Selección de Tipo de Archivo (RadioButton para selección única) -->
-    <Label text="Tipo de archivo:" />
-    <VBox spacing="5">
-        <RadioButton text="PDF" fx:id="pdfRadioButton" toggleGroup="$archivoToggleGroup"/>
-        <RadioButton text="Excel" fx:id="excelRadioButton" toggleGroup="$archivoToggleGroup"/>
-        <RadioButton text="CSV" fx:id="csvRadioButton" toggleGroup="$archivoToggleGroup" selected="true"/>
-    </VBox>
+        <!-- Selección de Tipo de Archivo -->
+        <Label text="Tipo de archivo:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+               style="-fx-text-fill: #4C4C4C;"/>
+        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <RadioButton text="PDF" fx:id="pdfRadioButton" toggleGroup="$archivoToggleGroup"
+                         style="-fx-text-fill: #4C4C4C;"/>
+            <RadioButton text="Excel" fx:id="excelRadioButton" toggleGroup="$archivoToggleGroup"
+                         style="-fx-text-fill: #4C4C4C;"/>
+            <RadioButton text="CSV" fx:id="csvRadioButton" toggleGroup="$archivoToggleGroup"
+                         selected="true" style="-fx-text-fill: #4C4C4C;"/>
+        </VBox>
 
-    <!-- Selección de Formato (RadioButton para selección única) -->
-    <Label text="Formato:" />
-    <VBox spacing="5">
-        <RadioButton text="Reporte" fx:id="reporteRadioButton" toggleGroup="$formatoToggleGroup"/>
-        <RadioButton text="Datos" fx:id="datosRadioButton" toggleGroup="$formatoToggleGroup"/>
-    </VBox>
+        <!-- Selección de Formato -->
+        <Label text="Formato:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+               style="-fx-text-fill: #4C4C4C;"/>
+        <VBox spacing="5" GridPane.rowIndex="3">
+            <RadioButton text="Reporte" fx:id="reporteRadioButton" toggleGroup="$formatoToggleGroup"
+                         style="-fx-text-fill: #4C4C4C;" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <RadioButton text="Datos" fx:id="datosRadioButton" toggleGroup="$formatoToggleGroup"
+                         style="-fx-text-fill: #4C4C4C;" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        </VBox>
+    </GridPane>
 
     <!-- Botón Exportar -->
-    <Button text="Exportar" fx:id="exportarButton" onAction="#exportarDatos"/>
-    <Label fx:id="mensajeLabel" textFill="red"/>
+    <Button text="Exportar" fx:id="exportarButton" onAction="#exportarDatos"
+            style="-fx-background-color: #33A1FD; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-padding: 10; -fx-background-radius: 5;"/>
+    <Label fx:id="mensajeLabel" textFill="red" style="-fx-text-fill: #F2AF29;"/>
 </VBox>
-
